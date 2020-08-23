@@ -1,5 +1,8 @@
-﻿using Benchmarks.Physics.Actions;
-using Benchmarks.Physics.DataGenerators;
+﻿// using Benchmarks.Physics.Actions;
+// using Benchmarks.Physics.DataGenerators;
+
+using Benchmarks.Stats.Actions;
+using Benchmarks.Stats.DataGenerators;
 using Core.Actions;
 using Core.Benchmarks;
 using Core.DataGenerators;
@@ -12,7 +15,9 @@ namespace ApacheArrowCs
         private static void Main()
         {
             var sequenceGenerator = new OrderedSequenceGenerator();
-            var dataGenerator = new PhysicsDataGenerator(sequenceGenerator);
+            // var dataGenerator = new PhysicsDataGenerator(sequenceGenerator);
+            var dataGenerator = new StatsDataGenerator(sequenceGenerator);
+
             var processors = new IProcessor[]
             {
                 new SimpleProcessor(dataGenerator),
@@ -21,13 +26,14 @@ namespace ApacheArrowCs
 
             var actions = new IAction[]
             {
-                new ApplyForce(),
-                new RandomizeForce(sequenceGenerator),
-                new AppendMass()
+                // new ApplyForce(),
+                // new RandomizeForce(sequenceGenerator),
+                // new AppendMass()
+                new CalculateMinMax()
             };
 
             var benchmark = new Benchmark();
-            benchmark.RunForAll(entities: 1000000, iterations: 1, processors, actions);
+            benchmark.RunForAll(entities: 10_000_000, iterations: 100, processors, actions);
         }
     }
 }

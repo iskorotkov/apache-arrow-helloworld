@@ -7,6 +7,7 @@
 
     <ItemGroup>
     <ProjectReference Include="..\Benchmarks.Physics\Benchmarks.Physics.csproj" />
+    <ProjectReference Include="..\Benchmarks.Stats\Benchmarks.Stats.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,6 +7,6 @@ namespace Core.DataGenerators
     public interface IDataSetGenerator
     {
         ProcessingData New(int size);
-        RecordBatch CreateBatch(MemoryAllocator allocator, int entities);
+        RecordBatch CreateBatch(MemoryAllocator allocator, int size);
     }
 }

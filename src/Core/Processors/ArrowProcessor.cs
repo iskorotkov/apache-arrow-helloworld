@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Apache.Arrow;
 using Apache.Arrow.Memory;
@@ -26,15 +27,22 @@ namespace Core.Processors
         private static void ExecuteActions(MemoryAllocator allocator, RecordBatch batch, IReadOnlyList<IAction> actions,
             int iterations)
         {
+            var builder = new RecordBatch.Builder(allocator);
             for (var i = 0; i < iterations; i++)
             {
-                var builder = new RecordBatch.Builder(allocator);
                 foreach (var action in actions)
                 {
                     action.Execute(batch, builder);
                 }
 
-                batch = builder.Build();
+                try
+                {
+                    batch = builder.Build();
+                    builder = new RecordBatch.Builder(allocator);
+                }
+                catch (InvalidOperationException)
+                {
+                }
             }
         }
     }

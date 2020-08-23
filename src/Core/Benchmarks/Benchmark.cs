@@ -1,8 +1,8 @@
 ﻿using System;
-using ApacheArrowCs.Actions;
-using ApacheArrowCs.Processors;
+using Core.Actions;
+using Core.Processors;
 
-namespace ApacheArrowCs.Benchmarks
+namespace Core.Benchmarks
 {
     public class Benchmark : IBenchmark
     {

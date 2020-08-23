@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using Apache.Arrow;
-using ApacheArrowCs.DataGenerators;
-using ApacheArrowCs.Processors.Physics;
+using Core.Actions;
+using Core.DataGenerators;
+using Core.Processors;
 
-namespace ApacheArrowCs.Actions.Physics
+namespace Benchmarks.Physics.Actions
 {
     public class RandomizeForce : IAction
     {
@@ -22,10 +23,10 @@ namespace ApacheArrowCs.Actions.Physics
                 builder.AppendRange(values)));
         }
 
-        public void Execute(SimpleProcessor.ProcessingData data)
+        public void Execute(ProcessingData data)
         {
             var length = data.Length;
-            data.Velocity = Generator.GetFloat(length).ToArray();
+            data.Arrays["Force"] = Generator.GetFloat(length).ToArray();
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using Apache.Arrow;
-using ApacheArrowCs.Processors.Physics;
+using Core.Actions;
+using Core.Processors;
 
-namespace ApacheArrowCs.Actions.Physics
+namespace Benchmarks.Physics.Actions
 {
     public class ApplyForce : IAction
     {
@@ -18,15 +19,17 @@ namespace ApacheArrowCs.Actions.Physics
                 results[i] = velocity.Values[i] + force.Values[i] / mass.Values[i];
             }
 
-            batchBuilder.Append("Velocity", false, arrayBuilder => arrayBuilder.Float(builder => builder.AppendRange(results)));
+            batchBuilder.Append("Velocity", false,
+                arrayBuilder => arrayBuilder.Float(builder => builder.AppendRange(results)));
         }
 
-        public void Execute(SimpleProcessor.ProcessingData data)
+        public void Execute(ProcessingData data)
         {
             var length = data.Length;
             for (var i = 0; i < length; i++)
             {
-                data.Velocity[i] += data.Force[i] / data.Mass[i];
+                data.GetArrayAs<float>("Velocity")[i] +=
+                    data.GetArrayAs<float>("Force")[i] / data.GetArrayAs<float>("Mass")[i];
             }
         }
     }

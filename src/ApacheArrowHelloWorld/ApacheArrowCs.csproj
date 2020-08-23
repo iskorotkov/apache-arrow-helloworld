@@ -5,8 +5,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Apache.Arrow" Version="1.0.1" />
+    <ItemGroup>
+    <ProjectReference Include="..\Benchmarks.Physics\Benchmarks.Physics.csproj" />
+    <ProjectReference Include="..\DataGenerators.Sequential\DataGenerators.Sequential.csproj" />
   </ItemGroup>
 
 </Project>

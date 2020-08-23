@@ -1,7 +1,8 @@
 ﻿using Apache.Arrow;
-using ApacheArrowCs.Processors.Physics;
+using Core.Actions;
+using Core.Processors;
 
-namespace ApacheArrowCs.Actions.Physics
+namespace Benchmarks.Physics.Actions
 {
     public class AppendMass : IAction
     {
@@ -10,7 +11,7 @@ namespace ApacheArrowCs.Actions.Physics
             batchBuilder.Append("Mass", false, batch.Column("Mass"));
         }
 
-        public void Execute(SimpleProcessor.ProcessingData data)
+        public void Execute(ProcessingData data)
         {
         }
     }

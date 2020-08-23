@@ -1,6 +1,6 @@
-﻿using ApacheArrowCs.Actions;
+﻿using Core.Actions;
 
-namespace ApacheArrowCs.Processors
+namespace Core.Processors
 {
     public interface IProcessor
     {

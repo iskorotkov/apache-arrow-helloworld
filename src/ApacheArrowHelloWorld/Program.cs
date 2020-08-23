@@ -1,9 +1,9 @@
-﻿using ApacheArrowCs.Actions;
-using ApacheArrowCs.Actions.Physics;
-using ApacheArrowCs.Benchmarks;
-using ApacheArrowCs.DataGenerators;
-using ApacheArrowCs.Processors;
-using ApacheArrowCs.Processors.Physics;
+﻿using Benchmarks.Physics.Actions;
+using Benchmarks.Physics.Processors;
+using Core.Actions;
+using Core.Benchmarks;
+using Core.DataGenerators;
+using Core.Processors;
 
 namespace ApacheArrowCs
 {

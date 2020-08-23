@@ -1,11 +1,11 @@
 ﻿using Apache.Arrow;
-using ApacheArrowCs.Processors.Physics;
+using Core.Processors;
 
-namespace ApacheArrowCs.Actions
+namespace Core.Actions
 {
     public interface IAction
     {
         void Execute(RecordBatch batch, RecordBatch.Builder batchBuilder);
-        void Execute(SimpleProcessor.ProcessingData data);
+        void Execute(ProcessingData data);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ApacheArrowCs.DataGenerators
+namespace Core.DataGenerators
 {
     public class OrderedValuesGenerator : IDataGenerator
     {

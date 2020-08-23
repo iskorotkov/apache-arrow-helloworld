@@ -2,10 +2,11 @@
 using System.Linq;
 using Apache.Arrow;
 using Apache.Arrow.Memory;
-using ApacheArrowCs.Actions;
-using ApacheArrowCs.DataGenerators;
+using Core.Actions;
+using Core.DataGenerators;
+using Core.Processors;
 
-namespace ApacheArrowCs.Processors.Physics
+namespace Benchmarks.Physics.Processors
 {
     public class ArrowProcessor : IProcessor
     {

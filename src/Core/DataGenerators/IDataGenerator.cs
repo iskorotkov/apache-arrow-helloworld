@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ApacheArrowCs.DataGenerators
+namespace Core.DataGenerators
 {
     public interface IDataGenerator
     {

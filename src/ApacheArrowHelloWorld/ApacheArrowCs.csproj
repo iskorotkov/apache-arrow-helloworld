@@ -7,7 +7,6 @@
 
     <ItemGroup>
     <ProjectReference Include="..\Benchmarks.Physics\Benchmarks.Physics.csproj" />
-    <ProjectReference Include="..\DataGenerators.Sequential\DataGenerators.Sequential.csproj" />
   </ItemGroup>
 
 </Project>

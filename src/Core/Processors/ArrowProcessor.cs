@@ -4,9 +4,8 @@ using Apache.Arrow;
 using Apache.Arrow.Memory;
 using Core.Actions;
 using Core.DataGenerators;
-using Core.Processors;
 
-namespace Benchmarks.Physics.Processors
+namespace Core.Processors
 {
     public class ArrowProcessor : IProcessor
     {
@@ -20,7 +19,7 @@ namespace Benchmarks.Physics.Processors
         public void Process(int entities, int iterations, IAction[] actions)
         {
             var allocator = new NativeMemoryAllocator();
-            var batch = CreateBatch(allocator, entities);
+            var batch = Generator.CreateBatch(allocator, entities);
             ExecuteActions(allocator, batch, actions.ToArray(), iterations);
         }
 
@@ -37,20 +36,6 @@ namespace Benchmarks.Physics.Processors
 
                 batch = builder.Build();
             }
-        }
-
-        private RecordBatch CreateBatch(MemoryAllocator allocator, int entities)
-        {
-            var data = Generator.New(entities);
-            var velocityArrayBuilder = new FloatArray.Builder().AppendRange(data.GetArrayAs<float>("Velocity"));
-            var forceArrayBuilder = new FloatArray.Builder().AppendRange(data.GetArrayAs<float>("Force"));
-            var massArrayBuilder = new FloatArray.Builder().AppendRange(data.GetArrayAs<float>("Mass"));
-
-            return new RecordBatch.Builder(allocator)
-                .Append("Velocity", false, velocityArrayBuilder)
-                .Append("Force", false, forceArrayBuilder)
-                .Append("Mass", false, massArrayBuilder)
-                .Build();
         }
     }
 }

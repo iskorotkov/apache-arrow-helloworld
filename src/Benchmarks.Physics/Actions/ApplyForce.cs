@@ -28,8 +28,8 @@ namespace Benchmarks.Physics.Actions
             var length = data.Length;
             for (var i = 0; i < length; i++)
             {
-                data.GetArrayAs<float>("Velocity")[i] +=
-                    data.GetArrayAs<float>("Force")[i] / data.GetArrayAs<float>("Mass")[i];
+                data.GetAs<float>("Velocity")[i] +=
+                    data.GetAs<float>("Force")[i] / data.GetAs<float>("Mass")[i];
             }
         }
     }

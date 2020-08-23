@@ -7,7 +7,7 @@ namespace Core.Processors
     {
         public Dictionary<string, object> Arrays { get; } = new Dictionary<string, object>();
 
-        public T[] GetArrayAs<T>(string name)
+        public T[] GetAs<T>(string name)
         {
             return (T[]) Arrays[name];
         }

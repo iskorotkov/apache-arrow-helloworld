@@ -1,8 +1,7 @@
 ﻿using Core.Actions;
 using Core.DataGenerators;
-using Core.Processors;
 
-namespace Benchmarks.Physics.Processors
+namespace Core.Processors
 {
     public class SimpleProcessor : IProcessor
     {

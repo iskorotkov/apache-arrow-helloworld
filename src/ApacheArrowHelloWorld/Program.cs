@@ -1,6 +1,5 @@
 ﻿using Benchmarks.Physics.Actions;
 using Benchmarks.Physics.DataGenerators;
-using Benchmarks.Physics.Processors;
 using Core.Actions;
 using Core.Benchmarks;
 using Core.Processors;

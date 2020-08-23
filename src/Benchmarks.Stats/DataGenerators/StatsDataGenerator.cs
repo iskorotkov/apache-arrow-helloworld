@@ -21,7 +21,8 @@ namespace Benchmarks.Stats.DataGenerators
             {
                 Arrays =
                 {
-                    ["Values"] = Generator.Float(size).ToArray()
+                    ["Values"] = Generator.Float(size).ToArray(),
+                    ["Values2"] = Generator.Float(size).ToArray()
                 }
             };
         }
@@ -31,6 +32,7 @@ namespace Benchmarks.Stats.DataGenerators
             var values = Generator.Float(entities);
             return new RecordBatch.Builder(allocator)
                 .Append("Values", false, arrayBuilder => arrayBuilder.Float(builder => builder.AppendRange(values)))
+                .Append("Values2", false, arrayBuilder => arrayBuilder.Float(builder => builder.AppendRange(values)))
                 .Build();
         }
     }

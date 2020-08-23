@@ -29,11 +29,12 @@ namespace ApacheArrowCs
                 // new ApplyForce(),
                 // new RandomizeForce(sequenceGenerator),
                 // new AppendMass()
-                new CalculateMinMax()
+                // new CalculateMinMax(),
+                new CalculateSumOfProducts()
             };
 
             var benchmark = new Benchmark();
-            benchmark.RunForAll(entities: 10_000_000, iterations: 100, processors, actions);
+            benchmark.RunForAll(entities: 1_000_000, iterations: 1000, processors, actions);
         }
     }
 }

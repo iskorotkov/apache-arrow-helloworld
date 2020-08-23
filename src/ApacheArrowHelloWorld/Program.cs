@@ -1,57 +1,31 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Apache.Arrow;
-using Apache.Arrow.Ipc;
-using Apache.Arrow.Memory;
+﻿using ApacheArrowCs.Actions;
+using ApacheArrowCs.Actions.Physics;
+using ApacheArrowCs.Benchmarks;
+using ApacheArrowCs.DataGenerators;
+using ApacheArrowCs.Processors;
+using ApacheArrowCs.Processors.Physics;
 
 namespace ApacheArrowCs
 {
     internal static class Program
     {
-        private static async Task Main()
+        private static void Main()
         {
-            await Write();
-            await Read();
-        }
-
-        private static async Task Write()
-        {
-            var memoryAllocator = new NativeMemoryAllocator();
-            var recordBatch = new RecordBatch.Builder(memoryAllocator)
-                .Append("Column A", false, col => col.Int32(array =>
-                    array.AppendRange(Enumerable.Range(0, 10))))
-                .Append("Column B", false,
-                    col => col.Float(array =>
-                        array.AppendRange(Enumerable.Range(0, 10).Select(x => Convert.ToSingle(x * 2)))))
-                .Append("Column C", false, col => col.String(array =>
-                    array.AppendRange(Enumerable.Range(0, 10).Select(x => $"Item {x + 1}"))))
-                .Append("Column D", false, col => col.Boolean(array =>
-                    array.AppendRange(Enumerable.Range(0, 10).Select(x => x % 2 == 0))))
-                .Build();
-
-            Console.WriteLine($"Allocations: {memoryAllocator.Statistics.Allocations}");
-            Console.WriteLine($"Allocated: {memoryAllocator.Statistics.BytesAllocated} byte(s)");
-
-            await using var stream = File.OpenWrite("test.arrow");
-            using var writer = new ArrowFileWriter(stream, recordBatch.Schema);
-
-            await writer.WriteRecordBatchAsync(recordBatch);
-            await writer.WriteEndAsync();
-        }
-
-        private static async Task Read()
-        {
-            await using var stream = File.OpenRead("test.arrow");
-            using var reader = new ArrowFileReader(stream);
-
-            var batches = await reader.RecordBatchCountAsync();
-            for (var i = 0; i < batches; i++)
+            var processors = new IProcessor[]
             {
-                var recordBatch = await reader.ReadNextRecordBatchAsync();
-                Console.WriteLine($"Columns: {recordBatch.ColumnCount}");
-            }
+                new SimpleProcessor(new OrderedValuesGenerator()),
+                new ArrowProcessor(new OrderedValuesGenerator()),
+            };
+
+            var actions = new IAction[]
+            {
+                new ApplyForce(),
+                new RandomizeForce(new OrderedValuesGenerator()),
+                new AppendMass()
+            };
+
+            var benchmark = new Benchmark();
+            benchmark.RunForAll(entities: 1000000, iterations: 1, processors, actions);
         }
     }
 }

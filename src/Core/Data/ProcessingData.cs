@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.Processors
+namespace Core.Data
 {
     public class ProcessingData
     {

@@ -2,8 +2,8 @@
 using Benchmarks.Physics.DataGenerators;
 using Core.Actions;
 using Core.Benchmarks;
+using Core.DataGenerators;
 using Core.Processors;
-using DataGenerators.Sequential;
 
 namespace ApacheArrowCs
 {

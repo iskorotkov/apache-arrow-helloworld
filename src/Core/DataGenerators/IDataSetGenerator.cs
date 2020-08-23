@@ -1,6 +1,6 @@
 ﻿using Apache.Arrow;
 using Apache.Arrow.Memory;
-using Core.Processors;
+using Core.Data;
 
 namespace Core.DataGenerators
 {

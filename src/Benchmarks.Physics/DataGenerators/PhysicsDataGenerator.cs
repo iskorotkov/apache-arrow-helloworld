@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Apache.Arrow;
 using Apache.Arrow.Memory;
+using Core.Data;
 using Core.DataGenerators;
-using Core.Processors;
 
 namespace Benchmarks.Physics.DataGenerators
 {

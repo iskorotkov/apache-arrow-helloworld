@@ -15,7 +15,7 @@ namespace Benchmarks.Physics.DataGenerators
             Generator = generator;
         }
 
-        public ProcessingData New(int size)
+        public ProcessingData Generate(int size)
         {
             return new ProcessingData
             {
@@ -28,9 +28,9 @@ namespace Benchmarks.Physics.DataGenerators
             };
         }
 
-        public RecordBatch CreateBatch(MemoryAllocator allocator, int entities)
+        public RecordBatch GenerateBatch(MemoryAllocator allocator, int entities)
         {
-            var data = New(entities);
+            var data = Generate(entities);
             var velocityArrayBuilder = new FloatArray.Builder().AppendRange(data.GetAs<float>("Velocity"));
             var forceArrayBuilder = new FloatArray.Builder().AppendRange(data.GetAs<float>("Force"));
             var massArrayBuilder = new FloatArray.Builder().AppendRange(data.GetAs<float>("Mass"));

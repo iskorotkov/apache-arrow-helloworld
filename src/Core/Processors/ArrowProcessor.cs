@@ -20,7 +20,7 @@ namespace Core.Processors
         public void Process(int entities, int iterations, IAction[] actions)
         {
             var allocator = new NativeMemoryAllocator();
-            var batch = Generator.CreateBatch(allocator, entities);
+            var batch = Generator.GenerateBatch(allocator, entities);
             ExecuteActions(allocator, batch, actions.ToArray(), iterations);
         }
 

@@ -15,7 +15,7 @@ namespace Benchmarks.Stats.DataGenerators
             Generator = generator;
         }
 
-        public ProcessingData New(int size)
+        public ProcessingData Generate(int size)
         {
             return new ProcessingData
             {
@@ -26,7 +26,7 @@ namespace Benchmarks.Stats.DataGenerators
             };
         }
 
-        public RecordBatch CreateBatch(MemoryAllocator allocator, int entities)
+        public RecordBatch GenerateBatch(MemoryAllocator allocator, int entities)
         {
             var values = Generator.Float(entities);
             return new RecordBatch.Builder(allocator)

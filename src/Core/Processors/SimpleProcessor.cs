@@ -14,7 +14,7 @@ namespace Core.Processors
 
         public void Process(int entities, int iterations, IAction[] actions)
         {
-            var data = Generator.New(entities);
+            var data = Generator.Generate(entities);
             for (var i = 0; i < iterations; i++)
             {
                 foreach (var action in actions)

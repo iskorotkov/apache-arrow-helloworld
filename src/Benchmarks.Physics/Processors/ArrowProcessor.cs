@@ -10,9 +10,9 @@ namespace Benchmarks.Physics.Processors
 {
     public class ArrowProcessor : IProcessor
     {
-        private IDataGenerator Generator { get; }
+        private IDataSetGenerator Generator { get; }
 
-        public ArrowProcessor(IDataGenerator generator)
+        public ArrowProcessor(IDataSetGenerator generator)
         {
             Generator = generator;
         }
@@ -39,12 +39,12 @@ namespace Benchmarks.Physics.Processors
             }
         }
 
-        // TODO: Move CreateBatch to another class
         private RecordBatch CreateBatch(MemoryAllocator allocator, int entities)
         {
-            var velocityArrayBuilder = new FloatArray.Builder().AppendRange(Generator.GetFloat(entities));
-            var forceArrayBuilder = new FloatArray.Builder().AppendRange(Generator.GetFloat(entities));
-            var massArrayBuilder = new FloatArray.Builder().AppendRange(Generator.GetFloat(entities));
+            var data = Generator.New(entities);
+            var velocityArrayBuilder = new FloatArray.Builder().AppendRange(data.GetArrayAs<float>("Velocity"));
+            var forceArrayBuilder = new FloatArray.Builder().AppendRange(data.GetArrayAs<float>("Force"));
+            var massArrayBuilder = new FloatArray.Builder().AppendRange(data.GetArrayAs<float>("Mass"));
 
             return new RecordBatch.Builder(allocator)
                 .Append("Velocity", false, velocityArrayBuilder)

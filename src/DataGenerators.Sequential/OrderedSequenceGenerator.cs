@@ -4,9 +4,9 @@ using Core.DataGenerators;
 
 namespace DataGenerators.Sequential
 {
-    public class SequentialGenerator : IDataGenerator
+    public class OrderedSequenceGenerator : ISequenceGenerator
     {
-        public IEnumerable<float> GetFloat(int count)
+        public IEnumerable<float> Float(int count)
         {
             return Enumerable.Range(1, count).Select(x => (float) x);
         }

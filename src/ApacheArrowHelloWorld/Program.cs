@@ -1,9 +1,10 @@
 ﻿using Benchmarks.Physics.Actions;
+using Benchmarks.Physics.DataGenerators;
 using Benchmarks.Physics.Processors;
 using Core.Actions;
 using Core.Benchmarks;
-using Core.DataGenerators;
 using Core.Processors;
+using DataGenerators.Sequential;
 
 namespace ApacheArrowCs
 {
@@ -11,16 +12,18 @@ namespace ApacheArrowCs
     {
         private static void Main()
         {
+            var sequenceGenerator = new OrderedSequenceGenerator();
+            var dataGenerator = new PhysicsDataGenerator(sequenceGenerator);
             var processors = new IProcessor[]
             {
-                new SimpleProcessor(new OrderedValuesGenerator()),
-                new ArrowProcessor(new OrderedValuesGenerator()),
+                new SimpleProcessor(dataGenerator),
+                new ArrowProcessor(dataGenerator),
             };
 
             var actions = new IAction[]
             {
                 new ApplyForce(),
-                new RandomizeForce(new OrderedValuesGenerator()),
+                new RandomizeForce(sequenceGenerator),
                 new AppendMass()
             };
 

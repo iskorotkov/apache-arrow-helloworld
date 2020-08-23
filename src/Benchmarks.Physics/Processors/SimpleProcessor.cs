@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Core.Actions;
+﻿using Core.Actions;
 using Core.DataGenerators;
 using Core.Processors;
 
@@ -7,25 +6,16 @@ namespace Benchmarks.Physics.Processors
 {
     public class SimpleProcessor : IProcessor
     {
-        private IDataGenerator Generator { get; }
+        private IDataSetGenerator Generator { get; }
 
-        public SimpleProcessor(IDataGenerator generator)
+        public SimpleProcessor(IDataSetGenerator generator)
         {
             Generator = generator;
         }
 
         public void Process(int entities, int iterations, IAction[] actions)
         {
-            var data = new ProcessingData
-            {
-                Arrays =
-                {
-                    ["Velocity"] = Generator.GetFloat(entities).ToArray(),
-                    ["Force"] = Generator.GetFloat(entities).ToArray(),
-                    ["Mass"] = Generator.GetFloat(entities).ToArray()
-                }
-            };
-
+            var data = Generator.New(entities);
             for (var i = 0; i < iterations; i++)
             {
                 foreach (var action in actions)
